@@ -1,7 +1,7 @@
 # go_api_v2
 
 On this version of rest api in golang i'm building an application that follows a clean arch design.
-and will be gradually building up the various layers of our application starting at the ```service layer```, then the ```repository layer``` and then finally the ```transport layer```.
+and will be gradually building up the various layers of our application starting at the ```service layer```, then the ```repository layer``` and then finally the ```transport layer``` just to improve my knowledge as golang software engineer  .
 
 
 

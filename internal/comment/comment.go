@@ -1,4 +1,4 @@
-package commant
+package comment
 
 import (
 	"context"
@@ -19,7 +19,8 @@ type Comment struct {
 }
 
 type Store interface {
-	GetComment(ctx context.Context, string2 string) (Comment, error)
+	GetComment(ctx context.Context, uuid string) (Comment, error)
+	PostComment(context.Context, Comment) (Comment, error)
 }
 
 type Service struct {
@@ -52,6 +53,12 @@ func (s *Service) DeleteComment(ctx context.Context, id string) error {
 	return ErrNotImplemented
 }
 
-func (s *Service) CreateComment(ctx context.Context, comment Comment) (Comment, error) {
-	return Comment{}, ErrNotImplemented
+func (s *Service) PostComment(ctx context.Context, cmt Comment) (Comment, error) {
+
+	insert, err := s.Store.PostComment(ctx, cmt)
+	if err != nil {
+		return Comment{}, fmt.Errorf("HERE %w", err)
+	}
+	fmt.Println(cmt)
+	return insert, nil
 }

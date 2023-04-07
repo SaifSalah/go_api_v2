@@ -1,11 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/saifsalah/go_api_v2/internal/comment"
 	"github.com/saifsalah/go_api_v2/internal/db"
+	transportHttp "github.com/saifsalah/go_api_v2/internal/transport/http"
 )
 
 // Run will be responsible for the init and startup the go app
@@ -32,12 +32,12 @@ func Run() error {
 
 	commentService := comment.NewService(db)
 
-	commentService.PostComment(context.Background(), comment.Comment{
-		Slug:   "saif-test1222",
-		Author: "Saif222",
-		Body:   "Ilove u golang1222",
-	})
-	fmt.Println(commentService.GetComment(context.Background(), "6ba7b810-9dad-11d1-80b4-00c04fd430c8"))
+	httpHandler := transportHttp.NewHandler(commentService)
+
+	if err := httpHandler.Serve(); err != nil {
+		return err
+	}
+
 	return nil
 
 }

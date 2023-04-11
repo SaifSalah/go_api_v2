@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:12.2-alpine
+    container_name: "comments_db"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - goRestApiv2
+    volumes:
+      - db_postgres:/var/lib/postgresql/data
+
+  api:
+    build: .
+    container_name: "rest_api_v2"
+    environment:
+      DB_USERNAME: "postgres"
+      DB_PASSWORD: "postgres"
+      DB_NAME: "postgres"
+      DB_HOST: "db"
+      DB_TABLE: "postgres"
+      DB_PORT: "5432"
+      SSL_MODE: "disable"
+    ports:
+      - "1992:1992"
+    depends_on:
+      - db
+    networks:
+      - goRestApiv2
+
+volumes:
+  db_postgres:
+
+networks:
+  goRestApiv2:
+    driver: bridge

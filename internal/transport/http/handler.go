@@ -50,7 +50,7 @@ func (h *Handler) Serve() error {
 	}()
 
 	ch := make(chan os.Signal, 1)
-	signal.Notify(ch)
+	signal.Notify(ch, os.Interrupt)
 	<-ch
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()

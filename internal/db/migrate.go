@@ -20,7 +20,8 @@ func (d *Database) MigrateDatabase() error {
 	}
 
 	Migrate, err := migrate.NewWithDatabaseInstance(
-		"file:D:/Development/golang/RestApiV2/migrations",
+		"file:///migrations",
+		// "file:D:/Development/golang/RestApiV2/migrations",
 		"postgres",
 		driver,
 	)

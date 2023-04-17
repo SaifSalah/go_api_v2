@@ -18,8 +18,6 @@ type Handler struct {
 	Server  *http.Server
 }
 
-type CommentService interface{}
-
 func NewHandler(service CommentService) *Handler {
 
 	handler := &Handler{
@@ -39,6 +37,11 @@ func (h *Handler) mapRoutes() {
 	h.Router.HandleFunc("/helth", func(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(w, "HELLo")
 	})
+
+	h.Router.HandleFunc("/api/v1/comment", h.PostComment).Methods("POST")
+	h.Router.HandleFunc("/api/v1/comment/{id}", h.GetComment).Methods("GET")
+	h.Router.HandleFunc("/api/v1/comment/{id}", h.UpdateComment).Methods("PUT")
+	h.Router.HandleFunc("/api/v1/comment/{id}", h.DeleteComment).Methods("DELTE")
 }
 
 func (h *Handler) Serve() error {

@@ -45,12 +45,12 @@ func (s *Service) GetComment(ctx context.Context, id string) (Comment, error) {
 	return cmt, nil
 }
 
-func (s *Service) UpdateComment(ctx context.Context, comment Comment) error {
+func (s *Service) UpdateComment(ctx context.Context, id string, comment Comment) error {
 	return ErrNotImplemented
 }
 
-func (s *Service) DeleteComment(ctx context.Context, id string) error {
-	return ErrNotImplemented
+func (s *Service) DeleteComment(ctx context.Context, id string, cmt Comment) (Comment, error) {
+	return Comment{}, ErrNotImplemented
 }
 
 func (s *Service) PostComment(ctx context.Context, cmt Comment) (Comment, error) {
